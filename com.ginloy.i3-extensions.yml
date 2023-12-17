@@ -1,0 +1,93 @@
+id: com.ginloy.i3-extensions
+runtime: org.gnome.Platform
+runtime-version: '45'
+sdk: org.gnome.Sdk
+command: launch
+cleanup:
+  - /etc
+  - /include
+  - /lib/debug
+  - /share/man
+finish-args:
+  - --share=ipc
+  - --socket=x11
+  - --device=dri
+  - --filesystem=xdg-run/i3
+  - --own-name=org.freedesktop.Notifications
+  - --talk-name=org.freedesktop.Flatpak
+
+
+modules:
+  - name: uthash
+    buildsystem: simple
+    build-commands:
+      - mkdir /app/include
+      - install -D src/* /app/include/ 
+    sources:
+      - type: git
+        url: https://github.com/troydhanson/uthash.git
+        branch: master
+
+  - name: libev
+    sources:
+      - type: git
+        url: https://github.com/enki/libev.git
+        branch: master
+
+  - name: libconfig
+    buildsystem: simple
+    build-commands:
+      - autoreconf
+      - ./configure --prefix=/app
+      - make
+      - make install
+    sources:
+      - type: git
+        url: https://github.com/hyperrealm/libconfig.git
+        branch: master
+
+  - name: picom
+    buildsystem: meson
+    sources:
+      - type: git
+        url: https://github.com/yshui/picom.git
+        branch: next
+
+  - autotiling.json
+
+  - name: dunst
+    # make-args:
+    #   - PREFIX=/app
+    make-install-args:
+      - PREFIX=/app
+    no-autogen: true
+    sources:
+      - type: git
+        url: https://github.com/dunst-project/dunst.git
+        tag: v1.9.2
+
+  - name: imlib2
+    sources:
+      - type: archive
+        url: https://sourceforge.net/projects/enlightenment/files/imlib2-src/1.12.1/imlib2-1.12.1.tar.gz
+        sha256: d35d746b245e64cd024833414eef148a8625f1bed720193cd5c2c33730188425
+
+  - name: feh
+    no-autogen: true
+    make-install-args:
+      - PREFIX=/app
+    sources:
+      - type: git
+        url: https://github.com/derf/feh.git
+        branch: master
+  
+  - name: others
+    buildsystem: simple
+    build-commands:
+      - install -Dm755 launch /app/bin/launch
+      - install -D background.png /app/share/feh/background.png
+    sources:
+      - type: file
+        path: launch
+      - type: file
+        path: background.png

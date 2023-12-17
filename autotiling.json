@@ -1,0 +1,24 @@
+{
+    "name": "python3-autotiling",
+    "buildsystem": "simple",
+    "build-commands": [
+        "pip3 install --verbose --exists-action=i --no-index --find-links=\"file://${PWD}\" --prefix=${FLATPAK_DEST} \"autotiling\" --no-build-isolation"
+    ],
+    "sources": [
+        {
+            "type": "file",
+            "url": "https://files.pythonhosted.org/packages/40/22/53e10730613879fdafdecaded80255c0b3f885de353b6b89a549968dc380/autotiling-1.8-py3-none-any.whl",
+            "sha256": "34069aaf06007f006fe3edde9000bb8297395ad989ba9efe522b541ea31534b2"
+        },
+        {
+            "type": "file",
+            "url": "https://files.pythonhosted.org/packages/de/30/294b07ddeccb58855c890c3ef3a951c3b0c1e2d089666d548b6a9edc39fb/i3ipc-2.2.1-py3-none-any.whl",
+            "sha256": "c0b898223d50d42c90c818deb5033d1304c582755547dee7d15df3e3781bc690"
+        },
+        {
+            "type": "file",
+            "url": "https://files.pythonhosted.org/packages/fc/b8/ff33610932e0ee81ae7f1269c890f697d56ff74b9f5b2ee5d9b7fa2c5355/python_xlib-0.33-py2.py3-none-any.whl",
+            "sha256": "c3534038d42e0df2f1392a1b30a15a4ff5fdc2b86cfa94f072bf11b10a164398"
+        }
+    ]
+}

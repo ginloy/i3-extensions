@@ -1,0 +1,20 @@
+#!/bin/bash
+
+flatpak-spawn --host killall picom
+flatpak-spawn --host killall autotiling
+flatpak-spawn --host killall dunst
+
+XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-$HOME/.config}
+BACKGROUND_RPATH="feh/background.png"
+
+if [[ -f "${XDG_CONFIG_HOME}/${BACKGROUND_RPATH}" ]]; then
+    BACKGROUND_PATH="${XDG_CONFIG_HOME}/${BACKGROUND_RPATH}"
+else
+    BACKGROUND_PATH="/app/share/${BACKGROUND_RPATH}"
+fi
+
+feh --bg-fill "${BACKGROUND_PATH}" &
+picom &
+autotiling &
+dunst &
+wait
