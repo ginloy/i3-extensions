@@ -1,9 +1,5 @@
 #!/bin/bash
 
-flatpak-spawn --host killall picom
-flatpak-spawn --host killall autotiling
-flatpak-spawn --host killall dunst
-
 XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-$HOME/.config}
 BACKGROUND_RPATH="feh/background.png"
 

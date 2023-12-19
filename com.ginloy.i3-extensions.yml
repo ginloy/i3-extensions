@@ -14,7 +14,6 @@ finish-args:
   - --device=dri
   - --filesystem=xdg-run/i3
   - --own-name=org.freedesktop.Notifications
-  - --talk-name=org.freedesktop.Flatpak
 
 
 modules:
